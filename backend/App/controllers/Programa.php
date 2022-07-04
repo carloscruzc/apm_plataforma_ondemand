@@ -145,6 +145,68 @@ html;
 
             $porcentaje = round(($progreso['segundos']*100)/$secs_totales);
 
+            $id = $_SESSION['user_id'];
+            $claves_cursos = ['5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP'];
+
+            $producto_2 = ProgramaDao::getUsersProduct($id);
+
+
+                if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] == $_SESSION['user_id']){
+                    $submenu = <<<html
+                <span class="text-bold font-14 text-lg" readonly>
+                    {$value['descripcion_subtitulo']}
+                </span>
+                <br><br>
+html;
+                    $desc_sub = '';
+                    $sub = <<<html
+                        <a href="/Programa/Video/{$value['clave']}">
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+                        </a>
+html;
+                }else if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] != $_SESSION['user_id']){
+                    $desc_sub = '';
+                    $sub = <<<html
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+html;
+                }
+                else{
+                    $submenu = '';
+                    $desc_sub = <<<html
+                        <span class="text-bold font-14 text-lg" readonly>
+                            {$value['descripcion_subtitulo']}
+                        </span>
+                        <br><br>
+html;
+                    $sub = <<<html
+                        <a href="/Programa/Video/{$value['clave']}">
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+                        </a>
+html;
+                }
+ 
+                
 
             if($value['id_coordinador'] != '' || $value['id_coordinador'] != 0){
                 $coordinador_1 = <<<html
@@ -171,37 +233,16 @@ html;
                         </span>
                     </div>
                     <div class="col-12 col-md-6">
-                        <a href="/Programa/Video/{$value['clave']}">
-                            <span class="color-green text-bold font-20 text-lg">
-                                {$value['descripcion']}
-                            </span>
-                            <br><br>
-                            <span class="text-bold font-18 text-lg">
-                            {$value['subtitulo']}
-                            </span>
-                            <br><br>
-                        </a>
-                            <span class="text-bold font-14 text-lg">
-                                {$value['descripcion_subtitulo']}
-                            </span>
-                            <br><br>
+                            {$sub}
+                            {$submenu}
+                            {$desc_sub}
                             <!--<span class="mt-4">
                                 <b>Progreso: $porcentaje %</b>
                                 <progress class="barra_progreso_small_green mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
                             </span>-->
                     </div>
                     <div class="col-12 col-md-4">
-                        {$coordinador_1}
-                        <span class="color-vine font-14 text-bold">
-                            Profesor:
-                        </span>
-                        <br>
-                        <span class="color-vine font-14 text-bold">
-                            {$value['prefijo']} {$value['nombre_profesor']}
-                        </span>
-                        <p class="color-vine font-12 mb-0 text-sm">
-                            {$value['desc_profesor']}
-                        </p>
+
                     </div>
                 </div>
 html;
@@ -230,6 +271,69 @@ html;
             $secs_totales = (intval($duracion_hrs)*3600)+(intval($duracion_min)*60)+intval($duracion_sec);
 
             $porcentaje = round(($progreso['segundos']*100)/$secs_totales);
+
+            $id = $_SESSION['user_id'];
+            $claves_cursos = ['5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP'];
+
+            $producto_2 = ProgramaDao::getUsersProduct($id);
+
+
+                if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] == $_SESSION['user_id']){
+                    $submenu = <<<html
+                <span class="text-bold font-14 text-lg" readonly>
+                    {$value['descripcion_subtitulo']}
+                </span>
+                <br><br>
+html;
+                    $desc_sub = '';
+                    $sub = <<<html
+                        <a href="/Programa/Video/{$value['clave']}">
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+                        </a>
+html;
+                }else if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] != $_SESSION['user_id']){
+                    $desc_sub = '';
+                    $sub = <<<html
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+html;
+                }
+                else{
+                    $submenu = '';
+                    $desc_sub = <<<html
+                        <span class="text-bold font-14 text-lg" readonly>
+                            {$value['descripcion_subtitulo']}
+                        </span>
+                        <br><br>
+html;
+                    $sub = <<<html
+                        <a href="/Programa/Video/{$value['clave']}">
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+                        </a>
+html;
+                }
+ 
+                
 
             $coordinador_1 = '';
 
@@ -356,35 +460,21 @@ html;
             $programa_fecha2 .= <<<html
                 <div class="row mb-3">
                     <div class="col-12 col-md-2">
-                        {$simposio}
+                        <span class="color-yellow text-bold">
+                            {$hora_inicio} - {$hora_fin}
+                        </span>
                     </div>
                     <div class="col-12 col-md-6">
-                    <a href="/Programa/Video/{$value['clave']}">
-                            <span class="color-green text-bold font-20 text-lg">
-                                {$value['descripcion']}
-                            </span>
-                            <br><br>
-                            <span class="text-bold font-18 text-lg">
-                            {$value['subtitulo']}
-                            </span>
-                            <br><br>
-                    </a>
-                            <span class="text-bold font-14 text-lg">
-                                {$value['descripcion_subtitulo']}
-                            </span>
-                            <br><br>
+                            {$sub}
+                            {$submenu}
+                            {$desc_sub}
                             <!--<span class="mt-4">
                                 <b>Progreso: $porcentaje %</b>
                                 <progress class="barra_progreso_small_green mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
                             </span>-->
                     </div>
                     <div class="col-12 col-md-4">
-                        {$coordinador_1}
-                        {$coordinador_2}
-                        {$coordinador_3}
-                        {$profesor_1}
-                        {$profesor_2}
-                        {$profesor_3}
+
                     </div>
                 </div>
 html;
@@ -413,6 +503,69 @@ html;
             $secs_totales = (intval($duracion_hrs)*3600)+(intval($duracion_min)*60)+intval($duracion_sec);
 
             $porcentaje = round(($progreso['segundos']*100)/$secs_totales);
+
+            $id = $_SESSION['user_id'];
+            $claves_cursos = ['5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP'];
+
+            $producto_2 = ProgramaDao::getUsersProduct($id);
+
+
+                if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] == $_SESSION['user_id']){
+                    $submenu = <<<html
+                <span class="text-bold font-14 text-lg" readonly>
+                    {$value['descripcion_subtitulo']}
+                </span>
+                <br><br>
+html;
+                    $desc_sub = '';
+                    $sub = <<<html
+                        <a href="/Programa/Video/{$value['clave']}">
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+                        </a>
+html;
+                }else if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] != $_SESSION['user_id']){
+                    $desc_sub = '';
+                    $sub = <<<html
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+html;
+                }
+                else{
+                    $submenu = '';
+                    $desc_sub = <<<html
+                        <span class="text-bold font-14 text-lg" readonly>
+                            {$value['descripcion_subtitulo']}
+                        </span>
+                        <br><br>
+html;
+                    $sub = <<<html
+                        <a href="/Programa/Video/{$value['clave']}">
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+                        </a>
+html;
+                }
+ 
+                
 
             $coordinador_1 = '';
 
@@ -525,32 +678,16 @@ html;
                         </span>
                     </div>
                     <div class="col-12 col-md-6">
-                        <a href="/Programa/Video/{$value['clave']}">
-                            <span class="color-green text-bold font-20 text-lg">
-                                {$value['descripcion']}
-                            </span>
-                            <br><br>
-                            <span class="text-bold font-18 text-lg">
-                            {$value['subtitulo']}
-                            </span>
-                            <br><br>
-                        </a>
-                            <span class="text-bold font-14 text-lg">
-                                {$value['descripcion_subtitulo']}
-                            </span>
-                            <br><br>
+                            {$sub}
+                            {$submenu}
+                            {$desc_sub}
                             <!--<span class="mt-4">
                                 <b>Progreso: $porcentaje %</b>
                                 <progress class="barra_progreso_small_green mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
                             </span>-->
                     </div>
                     <div class="col-12 col-md-4">
-                        {$coordinador_1}
-                        {$coordinador_2}
-                        {$coordinador_3}
-                        {$profesor_1}
-                        {$profesor_2}
-                        {$profesor_3}
+
                     </div>
                 </div>
 html;
@@ -579,6 +716,69 @@ html;
             $secs_totales = (intval($duracion_hrs)*3600)+(intval($duracion_min)*60)+intval($duracion_sec);
 
             $porcentaje = round(($progreso['segundos']*100)/$secs_totales);
+
+            $id = $_SESSION['user_id'];
+            $claves_cursos = ['5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP'];
+
+            $producto_2 = ProgramaDao::getUsersProduct($id);
+
+
+                if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] == $_SESSION['user_id']){
+                    $submenu = <<<html
+                <span class="text-bold font-14 text-lg" readonly>
+                    {$value['descripcion_subtitulo']}
+                </span>
+                <br><br>
+html;
+                    $desc_sub = '';
+                    $sub = <<<html
+                        <a href="/Programa/Video/{$value['clave']}">
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+                        </a>
+html;
+                }else if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] != $_SESSION['user_id']){
+                    $desc_sub = '';
+                    $sub = <<<html
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+html;
+                }
+                else{
+                    $submenu = '';
+                    $desc_sub = <<<html
+                        <span class="text-bold font-14 text-lg" readonly>
+                            {$value['descripcion_subtitulo']}
+                        </span>
+                        <br><br>
+html;
+                    $sub = <<<html
+                        <a href="/Programa/Video/{$value['clave']}">
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+                        </a>
+html;
+                }
+ 
+                
 
             $coordinador_1 = '';
 
@@ -704,35 +904,21 @@ html;
             $programa_fecha4 .= <<<html
                 <div class="row mb-3">
                     <div class="col-12 col-md-2">
-                            {$simposio}
+                        <span class="color-yellow text-bold">
+                            {$hora_inicio} - {$hora_fin}
+                        </span>
                     </div>
                     <div class="col-12 col-md-6">
-                        <a href="/Programa/Video/{$value['clave']}">
-                            <span class="color-green text-bold font-20 text-lg">
-                                {$value['descripcion']}
-                            </span>
-                            <br><br>
-                            <span class="text-bold font-18 text-lg">
-                            {$value['subtitulo']}
-                            </span>
-                            <br><br>
-                        </a>
-                            <span class="text-bold font-14 text-lg">
-                                {$value['descripcion_subtitulo']}
-                            </span>
-                            <br><br>
+                            {$sub}
+                            {$submenu}
+                            {$desc_sub}
                             <!--<span class="mt-4">
                                 <b>Progreso: $porcentaje %</b>
                                 <progress class="barra_progreso_small_green mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
                             </span>-->
                     </div>
                     <div class="col-12 col-md-4">
-                        {$coordinador_1}
-                        {$coordinador_2}
-                        {$coordinador_3}
-                        {$profesor_1}
-                        {$profesor_2}
-                        {$profesor_3}
+
                     </div>
                 </div>
 html;

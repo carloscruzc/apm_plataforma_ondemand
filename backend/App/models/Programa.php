@@ -22,6 +22,16 @@ sql;
       return $mysqli->queryAll($query);
     }
 
+    public static function getUsersProduct($id){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT ap.* FROM asigna_producto ap
+      INNER JOIN pendiente_pago pp ON pp.user_id = ap.user_id
+      WHERE (ap.id_producto = 2 AND pp.id_producto = 2) AND (ap.user_id = '$id');
+      sql;
+      return $mysqli->queryOne($query);
+    }
+
     public static function getSectionByDate($fecha){
       $mysqli = Database::getInstance();
       $query=<<<sql
