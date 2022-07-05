@@ -1741,6 +1741,17 @@ html;
         $html = "";
         foreach (CongresoDao::getBuscarCursos($id_user) as $key => $value) {
 
+            if($value['id_producto'] == 1){
+            $progreso_programa = CongresoDao::getProgresoPrograma($id_user);
+            }else if($value['id_producto'] > 1 AND $value['id_producto'] < 10){
+            $progreso_cursos = CongresoDao::getProgresoCursos($id_user,$value['id_producto']);
+            $progreso_programa = 0;
+            }
+            else{
+                $progreso_cursos = 0;
+                $progreso_programa = 0;
+            }
+
             $progreso = TalleresDao::getProductProgreso($id_user, $value['id_producto']);
 
             $max_time = $value['duracion'];
@@ -1748,26 +1759,29 @@ html;
             $duracion_min = substr($max_time, strlen($max_time) - 5, 2);
             $duracion_hrs = substr($max_time, 0, strpos($max_time, ':'));
 
-            $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
+            $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);             
 
-            $porcentaje = round(($progreso['segundos'] * 100) / $secs_totales);
-
-            //Verificar si es NAN
-            $porcentaje_1 = is_nan($porcentaje);            
-            if($porcentaje_1){
-                $porcentaje = 0;
-            }else{
-                $porcentaje = round(($progreso['segundos'] * 100) / $secs_totales);
-            }             
+            $progreso_total = $progreso['segundos'] + $progreso_programa['total_segundos'] + $progreso_cursos['total_segundos_a'];
 
             //Progreso Horas
-            $progreso_horas = round(($progreso['segundos'] / 3600));
+            $progreso_horas = round(($progreso_total / 3600));
 
             //progerso minutos 
             $progreso_minutos = ($progreso_horas * 60);
 
             //progreso a poner
             $progress = base64_encode($progreso_horas);
+
+            $porcentaje = round(($progreso_total * 100) / $secs_totales);
+
+            //Verificar si es NAN
+            $porcentaje_1 = is_nan($porcentaje);
+            $porcentaje_2 = is_infinite($porcentaje);           
+            if($porcentaje_1 || $porcentaje_2){
+                $porcentaje = 0;
+            }else{
+                $porcentaje = round(($progreso_total * 100) / $secs_totales);
+            }
 
             $existe = CongresoDao::getProductoByIdAndUser($value['id_producto'],$id_user);
 
@@ -1790,7 +1804,7 @@ html;
             </td>
             <td style="width:50%">
                 <div>
-                    <progress class="barra_progreso_small" max="{$secs_totales}" value="{$progreso['segundos']}"></progress>
+                    <progress class="barra_progreso_small" max="{$secs_totales}" value="{$progreso_total}"></progress>
                 </div>
                 
                 <span class="text-lg text-center text-dark opacity-8">Progreso <span class="porcentaje">{$porcentaje} %</span> </span>

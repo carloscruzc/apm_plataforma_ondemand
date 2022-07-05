@@ -6,7 +6,6 @@ use \Core\Database;
 use \Core\MasterDom;
 use \App\interfaces\Crud;
 use \App\controllers\UtileriasLog;
-
 class Congreso{
 
     public static function getAll(){
@@ -162,6 +161,32 @@ sql;
       SELECT * 
       FROM impresion_constancia_user      
       WHERE id_producto = $id_producto and user_id ='$user_id'
+sql;
+      return $mysqli->queryOne($query);
+    }
+
+    public static function getProgresoPrograma($user_id){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT SUM(pp.segundos) AS total_segundos
+      FROM progresos_programa pp
+      INNER JOIN programa pr ON pp.id_programa = pr.id_programa
+      WHERE 
+      (pr.clave NOT IN ('5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP')) 
+      AND (user_id ='$user_id');
+sql;
+      return $mysqli->queryOne($query);
+    }
+
+    public static function getProgresoCursos($user_id,$id_producto){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT pr.id_producto,pp.segundos AS total_segundos_a
+      FROM progresos_programa pp
+      INNER JOIN programa pr ON pp.id_programa = pr.id_programa
+      WHERE 
+      (pr.id_producto = '$id_producto') 
+      AND (user_id ='$user_id');
 sql;
       return $mysqli->queryOne($query);
     }

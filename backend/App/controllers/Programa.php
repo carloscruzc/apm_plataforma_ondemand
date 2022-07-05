@@ -129,6 +129,13 @@ html;
         
         <br>            
 html;
+        $id = $_SESSION['user_id'];
+        $id_producto_clave_consulta = '';
+        $producto_2 = ProgramaDao::getUsersProduct($id);
+        $items = array();
+        foreach ($producto_2 as $key => $value_producto){
+            $items[] = $value_producto['id_producto'];
+        }
 
         foreach ($info_fecha1 as $key => $value) {
             $progreso = ProgramaDao::getProgreso($_SESSION['user_id'],$value['id_programa']);
@@ -147,11 +154,8 @@ html;
 
             $id = $_SESSION['user_id'];
             $claves_cursos = ['5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP'];
-
-            $producto_2 = ProgramaDao::getUsersProduct($id);
-
-
-                if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] == $_SESSION['user_id']){
+            
+                if(in_array($value['clave'],$claves_cursos) AND ($value_producto['user_id'] == $_SESSION['user_id']) AND (in_array($value['id_producto'],$items))){
                     $submenu = <<<html
                 <span class="text-bold font-14 text-lg" readonly>
                     {$value['descripcion_subtitulo']}
@@ -171,7 +175,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] != $_SESSION['user_id']){
+                }else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -182,7 +186,7 @@ html;
                             {$value['subtitulo']}
                             </span>
                             <br><br>
-html;
+html;               $submenu = '';
                 }
                 else{
                     $submenu = '';
@@ -274,11 +278,8 @@ html;
 
             $id = $_SESSION['user_id'];
             $claves_cursos = ['5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP'];
-
-            $producto_2 = ProgramaDao::getUsersProduct($id);
-
-
-                if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] == $_SESSION['user_id']){
+            
+                if(in_array($value['clave'],$claves_cursos) AND ($value_producto['user_id'] == $_SESSION['user_id']) AND (in_array($value['id_producto'],$items))){
                     $submenu = <<<html
                 <span class="text-bold font-14 text-lg" readonly>
                     {$value['descripcion_subtitulo']}
@@ -298,7 +299,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] != $_SESSION['user_id']){
+                }else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -309,7 +310,7 @@ html;
                             {$value['subtitulo']}
                             </span>
                             <br><br>
-html;
+html;               $submenu = '';
                 }
                 else{
                     $submenu = '';
@@ -506,11 +507,8 @@ html;
 
             $id = $_SESSION['user_id'];
             $claves_cursos = ['5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP'];
-
-            $producto_2 = ProgramaDao::getUsersProduct($id);
-
-
-                if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] == $_SESSION['user_id']){
+            
+                if(in_array($value['clave'],$claves_cursos) AND ($value_producto['user_id'] == $_SESSION['user_id']) AND (in_array($value['id_producto'],$items))){
                     $submenu = <<<html
                 <span class="text-bold font-14 text-lg" readonly>
                     {$value['descripcion_subtitulo']}
@@ -530,7 +528,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] != $_SESSION['user_id']){
+                }else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -541,7 +539,7 @@ html;
                             {$value['subtitulo']}
                             </span>
                             <br><br>
-html;
+html;               $submenu = '';
                 }
                 else{
                     $submenu = '';
@@ -719,11 +717,8 @@ html;
 
             $id = $_SESSION['user_id'];
             $claves_cursos = ['5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP'];
-
-            $producto_2 = ProgramaDao::getUsersProduct($id);
-
-
-                if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] == $_SESSION['user_id']){
+            
+                if(in_array($value['clave'],$claves_cursos) AND ($value_producto['user_id'] == $_SESSION['user_id']) AND (in_array($value['id_producto'],$items))){
                     $submenu = <<<html
                 <span class="text-bold font-14 text-lg" readonly>
                     {$value['descripcion_subtitulo']}
@@ -743,7 +738,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if(in_array($value['clave'],$claves_cursos,TRUE) AND $producto_2['user_id'] != $_SESSION['user_id']){
+                }else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -754,7 +749,7 @@ html;
                             {$value['subtitulo']}
                             </span>
                             <br><br>
-html;
+html;               $submenu = '';
                 }
                 else{
                     $submenu = '';
